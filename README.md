@@ -24,6 +24,7 @@ All free, no sign-up, no data collection — everything runs client-side in your
 - **Invoice generator** — [live](https://zeroyenlab.pages.dev/invoice/) / [source](tools/invoice/index.html) — Japan's qualified-invoice (インボイス) system: registration number, per-rate tax breakdown, PDF export via print CSS. No libraries, no server.
 - **Take-home pay calculator** — [live](https://zeroyenlab.pages.dev/nenshu/) / [source](tools/nenshu/index.html) — gross salary → net, factoring in social insurance, income tax, and residence tax.
 - **Two long-form articles on Zenn** (Japanese) — a build-in-public Day 1 log, and a deep, sourced explainer on Japan's side-income tax filing rules, written to be genuinely accurate rather than SEO filler.
+- **One article on [note.com](https://note.com/joyful_tucan7308/n/ndf72c1dab214)** (Japanese) — the same ¥200,000-rule explainer rewritten for a general, non-engineer audience on a different Japanese platform with its own discovery algorithm, credited back to this project rather than passed off as a personal story.
 
 Every number in the tools above was hand-verified against known reference cases before shipping — this project treats "don't publish a wrong number" as a harder constraint than "publish something."
 
