@@ -1,0 +1,245 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>副業の税金・手取り ざっくり計算機｜確定申告いる？診断つき</title>
+<meta name="description" content="副業の収入と経費を入れるだけで「確定申告いる？」の判定と、所得税・住民税・手取りのざっくり目安が出る無料ツール。全部ブラウザ内で計算し、入力はどこにも送りません。">
+<link rel="canonical" href="https://zeroyenlab.pages.dev/">
+<link rel="icon" type="image/png" sizes="32x32" href="brand/icon-32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="brand/icon-180.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Zero Yen Lab（ゼロ円ラボ）">
+<meta property="og:locale" content="ja_JP">
+<meta property="og:title" content="副業の税金・手取り ざっくり計算機｜確定申告いる？診断つき">
+<meta property="og:description" content="副業の収入と経費を入れるだけで「確定申告いる？」の判定と、所得税・住民税・手取りのざっくり目安が出る無料ツール。入力は送信しません。">
+<meta property="og:url" content="https://zeroyenlab.pages.dev/">
+<meta property="og:image" content="https://zeroyenlab.pages.dev/brand/icon-512.png">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="副業の税金・手取り ざっくり計算機">
+<meta name="twitter:description" content="収入と経費を入れるだけで「確定申告いる？」判定＋手取り目安。完全無料・送信なし。">
+<meta name="twitter:image" content="https://zeroyenlab.pages.dev/brand/icon-512.png">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebApplication","name":"副業の税金・手取り ざっくり計算機","url":"https://zeroyenlab.pages.dev/","description":"副業の収入と経費を入れるだけで確定申告の要否と所得税・住民税・手取りの目安が出る無料ツール。","applicationCategory":"FinanceApplication","operatingSystem":"Any (Webブラウザ)","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"JPY"},"publisher":{"@type":"Organization","name":"Zero Yen Lab"}}
+</script>
+<!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "c3746b70fa79492f9372ee09f32fa729"}'></script><!-- End Cloudflare Web Analytics -->
+<style>
+  :root{
+    --bg:#f6f7f9; --card:#ffffff; --ink:#1a1d21; --sub:#5b636c;
+    --line:#e3e6ea; --accent:#2f6f4f; --accent-ink:#1c5a3c;
+    --warn-bg:#fff7e6; --warn-line:#f0c36d; --ok-bg:#eef7f1; --ng-bg:#fdeeee; --ng-line:#e5a3a3;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{ --bg:#14171a; --card:#1d2226; --ink:#eef1f3; --sub:#a7b0b8;
+      --line:#2c333a; --accent:#5fb98a; --accent-ink:#8fd6ad;
+      --warn-bg:#2c2717; --warn-line:#6b5a2a; --ok-bg:#17251d; --ng-bg:#2a1a1a; --ng-line:#6b3a3a; }
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font-family:system-ui,-apple-system,"Segoe UI","Hiragino Kaku Gothic ProN","Noto Sans JP",sans-serif;
+    line-height:1.7;-webkit-text-size-adjust:100%}
+  .wrap{max-width:680px;margin:0 auto;padding:20px 16px 64px}
+  header h1{font-size:1.35rem;margin:.2em 0 .1em;line-height:1.4}
+  .lead{color:var(--sub);font-size:.92rem;margin:.2em 0 1.2em}
+  .privacy{display:inline-block;font-size:.8rem;background:var(--ok-bg);color:var(--accent-ink);
+    border:1px solid var(--line);border-radius:999px;padding:3px 10px;margin-bottom:14px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 16px;margin:0 0 16px}
+  label{display:block;font-weight:600;font-size:.9rem;margin:14px 0 4px}
+  .hint{font-weight:400;color:var(--sub);font-size:.8rem;margin-left:.4em}
+  input[type=number],select{width:100%;padding:11px 12px;font-size:1rem;color:var(--ink);
+    background:var(--bg);border:1px solid var(--line);border-radius:10px}
+  input:focus,select:focus{outline:2px solid var(--accent);outline-offset:1px}
+  .row{display:flex;gap:12px;flex-wrap:wrap}
+  .row>div{flex:1 1 150px}
+  .check{display:flex;align-items:flex-start;gap:9px;margin:16px 0 4px;font-size:.92rem}
+  .check input{margin-top:5px;transform:scale(1.15)}
+  button{margin-top:18px;width:100%;padding:13px;font-size:1.02rem;font-weight:700;color:#fff;
+    background:var(--accent);border:none;border-radius:10px;cursor:pointer}
+  button:hover{filter:brightness(1.06)}
+  #result{margin-top:4px}
+  .verdict{border-radius:12px;padding:14px 16px;margin-bottom:14px;border:1px solid var(--line)}
+  .verdict.need{background:var(--ng-bg);border-color:var(--ng-line)}
+  .verdict.maybe{background:var(--warn-bg);border-color:var(--warn-line)}
+  .verdict.free{background:var(--ok-bg)}
+  .verdict h2{font-size:1.08rem;margin:0 0 .3em}
+  .verdict p{margin:.3em 0;font-size:.9rem}
+  table{width:100%;border-collapse:collapse;margin-top:6px;font-size:.95rem}
+  td{padding:9px 4px;border-bottom:1px solid var(--line)}
+  td:last-child{text-align:right;font-variant-numeric:tabular-nums;font-weight:600}
+  tr.total td{border-bottom:none;font-size:1.05rem;padding-top:12px}
+  tr.total td:last-child{color:var(--accent-ink)}
+  .muted{color:var(--sub);font-size:.82rem}
+  details{margin-top:10px;font-size:.86rem}
+  summary{cursor:pointer;font-weight:600;color:var(--accent-ink)}
+  .disc{background:var(--warn-bg);border:1px solid var(--warn-line);border-radius:12px;
+    padding:12px 14px;font-size:.82rem;color:var(--ink);margin-top:18px}
+  .disc b{color:var(--ink)}
+  footer{margin-top:26px;font-size:.8rem;color:var(--sub);text-align:center;line-height:1.8}
+  a{color:var(--accent-ink)}
+  ul{padding-left:1.2em;margin:.4em 0}
+  li{margin:.15em 0}
+  .hidden{display:none}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <span class="privacy">🔒 入力はどこにも送信しません（すべてブラウザ内で計算）</span>
+    <p class="muted" style="font-size:.78rem;margin:.4em 0 0">📈 ページ閲覧数の計測に Cloudflare Web Analytics（Cookie不使用・個々の訪問者を追跡しない）を使っています。あなたが入力した数値は引き続き送信されません。</p>
+    <h1>副業の税金・手取り ざっくり計算機</h1>
+    <p class="lead">収入と経費を入れるだけで「確定申告いる？」の判定と、所得税・住民税・手取りの<b>目安</b>が出ます。会員登録・費用ゼロ。</p>
+  </header>
+
+  <div class="card">
+    <label for="income">副業の年間<b>収入</b>（売上）<span class="hint">円 ／ 経費を引く前</span></label>
+    <input type="number" id="income" inputmode="numeric" placeholder="例）500000" min="0" step="1000">
+
+    <label for="expense">その副業にかかった<b>経費</b><span class="hint">円 ／ わからなければ0</span></label>
+    <input type="number" id="expense" inputmode="numeric" placeholder="例）80000" min="0" step="1000">
+
+    <label class="check"><input type="checkbox" id="isEmployee" checked>
+      <span>会社などから<b>給与</b>をもらっている（給与所得者）<br>
+      <span class="muted">＝「副業20万円ルール」の対象になる人</span></span></label>
+
+    <label for="bracket">本業（給与）の<b>おおよその課税所得帯</b><span class="hint">税率の目安に使用</span></label>
+    <select id="bracket">
+      <option value="0.05">～195万円（年収の目安：～約300万円）</option>
+      <option value="0.10" selected>195万～330万円（年収：約300～470万円）</option>
+      <option value="0.20">330万～695万円（年収：約470～850万円）</option>
+      <option value="0.23">695万～900万円（年収：約850～1050万円）</option>
+      <option value="0.33">900万～1800万円（年収：約1050～2000万円）</option>
+      <option value="0.40">1800万～4000万円</option>
+      <option value="0.45">4000万円超</option>
+    </select>
+
+    <button id="calc">計算する</button>
+  </div>
+
+  <div id="result" class="hidden"></div>
+
+  <!--
+    ▼▼ 収益化ブロック挿入ポイント（人間がASP提携後に有効化）▼▼
+    会計ソフト（freee/マネーフォワード/弥生）のアフィリエイトを、必ず「PR」明示ラベル付きで置く。
+    誇張・煽り・ステマ禁止（景表法/ステマ規制）。リンクは <AFFILIATE_KAIKEI_URL> を差し替え。
+    現状は非表示（空の宣伝枠を出さない＝正直）。有効化はトラフィックが出てから。
+    <aside class="promo">
+      <p><b>PR</b>：確定申告するなら会計ソフトが楽です（初年度無料あり）。
+      <a href="&lt;AFFILIATE_KAIKEI_URL&gt;" rel="sponsored nofollow noopener" target="_blank">◯◯を見る</a></p>
+    </aside>
+    ▲▲ ここまで ▲▲
+  -->
+
+  <div class="disc">
+    <b>⚠️ これは「ざっくり目安」ツールです（税務アドバイスではありません）。</b><br>
+    副業所得を本業の課税所得に上乗せして単純計算しています。各種所得控除・社会保険料・扶養・ふるさと納税・複数の税率帯にまたがるケースなどは反映していません。
+    正確な税額や個別の判断は、<b>国税庁の確定申告書等作成コーナー</b>や<b>税理士・お住まいの市区町村</b>でご確認ください。数字は入力に対して機械的に出しているだけで、正確性を保証するものではありません。
+    <br><br>「20万円ルールは所得税だけ、住民税は別」など、判定の根拠を条件つきで詳しく解説した記事もあります → <a href="https://zenn.dev/zeroyenlab/articles/zeroyenlab-fukugyo-kakutei-guide" id="guideLink" target="_blank" rel="noopener">解説記事を読む</a>
+  </div>
+
+  <footer>
+    <p><b>Zero Yen Lab（ゼロ円ラボ）</b> の作品です。<br>
+    ¥0から、正直に。AIが金稼ぎに挑む全記録 ── 売上も失敗も隠さず公開しています。<br>
+    <span class="muted">An AI trying to earn from ¥0 — honestly, fully in the open.</span><br>
+    <a href="nenshu/">📊 年収→手取り計算機</a>　/　<a href="invoice/">🧾 無料 請求書メーカー（インボイス対応）</a>　/　<a href="https://zenn.dev/zeroyenlab/articles/zeroyenlab-day1-tax-tool" id="journalLink" target="_blank" rel="noopener">実録を読む</a>　/　<a href="https://zenn.dev/zeroyenlab/articles/zeroyenlab-fukugyo-kakutei-guide" id="guideLink2" target="_blank" rel="noopener">確定申告の解説を読む</a></p>
+    <p class="muted">参考：国税庁・各会計ソフト公式の解説（弥生・freee 等）を元に一般的なルールを実装。最終更新 2026-07</p>
+  </footer>
+</div>
+
+<script>
+(function(){
+  var yen = function(n){ return Math.round(n).toLocaleString('ja-JP') + '円'; };
+  var $ = function(id){ return document.getElementById(id); };
+
+  $('calc').addEventListener('click', function(){
+    var income = Math.max(0, Number($('income').value) || 0);
+    var expense = Math.max(0, Number($('expense').value) || 0);
+    var isEmp = $('isEmployee').checked;
+    var mrate = Number($('bracket').value);
+
+    var shotoku = Math.max(0, income - expense); // 副業の所得（雑所得を想定）
+    var out = [];
+
+    // --- 確定申告の判定 ---
+    var vClass, vTitle, vBody, filingNeeded = true;
+    if(income === 0){
+      $('result').className = '';
+      $('result').innerHTML = '<div class="verdict maybe"><h2>収入を入力してください</h2><p>副業の年間収入（売上）を入れると判定します。</p></div>';
+      $('result').scrollIntoView({behavior:'smooth', block:'start'});
+      return;
+    }
+
+    if(isEmp){
+      if(shotoku <= 200000){
+        vClass = 'free';
+        filingNeeded = false;
+        vTitle = '所得税の確定申告は「原則いりません」';
+        vBody = '給与所得者で、副業の<b>所得（収入−経費）が20万円以下</b>のため、所得税の確定申告は原則不要です。'
+              + '<br><b>ただし住民税の申告は別途必要です。</b>「20万円以下なら申告不要」の特例は<u>所得税だけ</u>で、住民税にはこのルールがありません。'
+              + '<br><span class="muted">※ 医療費控除やふるさと納税などで確定申告をする場合は、20万円以下の副業分も一緒に申告が必要になります。</span>';
+      } else {
+        vClass = 'need';
+        vTitle = '確定申告が「必要」です';
+        vBody = '副業の<b>所得が20万円を超えています</b>（' + yen(shotoku) + '）。給与所得者でも確定申告が必要です。'
+              + '<br>会社に副業を知られたくない場合は、申告時に住民税を「自分で納付（普通徴収）」にすると通知が本業へ行きにくくなります（自治体により対応が異なります）。';
+      }
+    } else {
+      vClass = 'maybe';
+      vTitle = '確定申告が必要になる可能性が高いです';
+      vBody = '給与所得がない場合、「副業20万円ルール」は使えません。基礎控除などを差し引いた課税所得が出るなら申告が必要です。詳しくは国税庁の案内をご確認ください。';
+    }
+
+    // --- 税額のざっくり目安 ---
+    var showTax = shotoku > 0;
+    var incomeTax = 0, reconTax = 0, resiTax = 0, totalTax = 0, tedori = 0;
+    if(showTax){
+      // filingNeeded=false（給与所得者で20万円以下）なら所得税は申告不要＝実際にはかからない。住民税は別途必要。
+      incomeTax = filingNeeded ? shotoku * mrate : 0;   // 所得税（限界税率で概算）
+      reconTax  = incomeTax * 0.021;                    // 復興特別所得税 2.1%
+      resiTax   = shotoku * 0.10;                       // 住民税（所得割 約10%）
+      totalTax  = incomeTax + reconTax + resiTax;
+      tedori    = shotoku - totalTax;
+    }
+
+    var html = '';
+    html += '<div class="verdict '+vClass+'"><h2>'+vTitle+'</h2><p>'+vBody+'</p></div>';
+
+    html += '<div class="card">';
+    html += '<table>';
+    html += '<tr><td>副業の収入（売上）</td><td>'+yen(income)+'</td></tr>';
+    html += '<tr><td>経費</td><td>−'+yen(expense)+'</td></tr>';
+    html += '<tr><td><b>副業の所得</b>（＝課税のもと）</td><td>'+yen(shotoku)+'</td></tr>';
+    if(showTax){
+      if(filingNeeded){
+        html += '<tr><td>所得税の目安（税率'+Math.round(mrate*100)+'%）</td><td>−'+yen(incomeTax)+'</td></tr>';
+        html += '<tr><td>復興特別所得税（2.1%）</td><td>−'+yen(reconTax)+'</td></tr>';
+      } else {
+        html += '<tr><td>所得税（申告不要のため）</td><td>0円</td></tr>';
+      }
+      html += '<tr><td>住民税の目安（約10%）</td><td>−'+yen(resiTax)+'</td></tr>';
+      html += '<tr class="total"><td>手取りの目安</td><td>'+yen(tedori)+'</td></tr>';
+    }
+    html += '</table>';
+    if(showTax){
+      html += '<p class="muted" style="margin-top:10px">税金の合計目安：約 <b>'+yen(totalTax)+'</b>（副業所得の約 '
+           + Math.round(totalTax/shotoku*100) + '%）。副業所得を本業の課税所得に上乗せした概算です。</p>';
+    } else {
+      html += '<p class="muted" style="margin-top:10px">所得が0円のため税額は発生しません。</p>';
+    }
+    html += '<details><summary>計算の中身と根拠を見る</summary>'
+         + '<ul>'
+         + '<li>副業の所得 ＝ 収入 −経費（帳簿を付けていない副業は原則「雑所得」扱い）</li>'
+         + '<li>所得税 ＝ 副業所得 × あなたが選んだ限界税率。実際は複数の税率帯にまたがることがあります</li>'
+         + '<li>復興特別所得税 ＝ 所得税 × 2.1%（2037年分まで）</li>'
+         + '<li>住民税 ＝ 副業所得 × 約10%（所得割の標準税率）。均等割は未考慮</li>'
+         + '<li>各種所得控除・社会保険料・扶養の判定などは<b>含めていません</b></li>'
+         + '</ul></details>';
+    html += '</div>';
+
+    $('result').className = '';
+    $('result').innerHTML = html;
+    $('result').scrollIntoView({behavior:'smooth', block:'start'});
+  });
+})();
+</script>
+</body>
+</html>

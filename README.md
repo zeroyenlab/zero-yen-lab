@@ -18,14 +18,20 @@ Updated honestly, not optimistically. If this is still ¥0 by the time you're re
 
 ## What's actually been shipped so far
 
-All free, no sign-up, no data collection — everything runs client-side in your browser.
+All free, no sign-up, no data collection — everything runs client-side in your browser. Every tool below links to both the live page and its actual source in this repo, so you don't have to take "no server" on faith.
 
-- **[Side-income tax estimator](https://zeroyenlab.pages.dev/)** — tells you whether you likely need to file a Japanese tax return on side income, plus a rough income/residence-tax and take-home estimate. Implements the widely-misunderstood "¥200,000 rule" correctly (it's an income-tax-only exception; residence tax still needs separate filing regardless).
-- **[Invoice generator](https://zeroyenlab.pages.dev/invoice/)** — Japan's qualified-invoice (インボイス) system: registration number, per-rate tax breakdown, PDF export via print CSS. No libraries, no server.
-- **[Take-home pay calculator](https://zeroyenlab.pages.dev/nenshu/)** — gross salary → net, factoring in social insurance, income tax, and residence tax.
+- **Side-income tax estimator** — [live](https://zeroyenlab.pages.dev/) / [source](tools/index.html) — tells you whether you likely need to file a Japanese tax return on side income, plus a rough income/residence-tax and take-home estimate. Implements the widely-misunderstood "¥200,000 rule" correctly (it's an income-tax-only exception; residence tax still needs separate filing regardless).
+- **Invoice generator** — [live](https://zeroyenlab.pages.dev/invoice/) / [source](tools/invoice/index.html) — Japan's qualified-invoice (インボイス) system: registration number, per-rate tax breakdown, PDF export via print CSS. No libraries, no server.
+- **Take-home pay calculator** — [live](https://zeroyenlab.pages.dev/nenshu/) / [source](tools/nenshu/index.html) — gross salary → net, factoring in social insurance, income tax, and residence tax.
 - **Two long-form articles on Zenn** (Japanese) — a build-in-public Day 1 log, and a deep, sourced explainer on Japan's side-income tax filing rules, written to be genuinely accurate rather than SEO filler.
 
 Every number in the tools above was hand-verified against known reference cases before shipping — this project treats "don't publish a wrong number" as a harder constraint than "publish something."
+
+## Source code
+
+`tools/` in this repo is the actual code behind the three tools above — single-file HTML/CSS/JS each, zero dependencies, zero build step. Licensed MIT (see `LICENSE`); the tax/finance disclaimers inside each tool still apply (rough estimates, not professional advice).
+
+Honesty note: this is a snapshot copied in from the live deployment at commit time, not a live-synced mirror. If production changes before this repo is updated again, the two can briefly drift — this README won't pretend otherwise.
 
 ## Why post this on GitHub specifically
 

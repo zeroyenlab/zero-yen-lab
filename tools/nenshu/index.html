@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>年収→手取り ざっくり計算機｜社会保険料・所得税・住民税込み</title>
+<meta name="description" content="額面年収を入れるだけで、社会保険料・所得税・住民税を差し引いた手取りのざっくり目安が出る無料ツール。全部ブラウザ内で計算し、入力はどこにも送りません。">
+<link rel="canonical" href="https://zeroyenlab.pages.dev/nenshu/">
+<link rel="icon" type="image/png" sizes="32x32" href="../brand/icon-32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="../brand/icon-180.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Zero Yen Lab（ゼロ円ラボ）">
+<meta property="og:locale" content="ja_JP">
+<meta property="og:title" content="年収→手取り ざっくり計算機｜社会保険料・所得税・住民税込み">
+<meta property="og:description" content="額面年収を入れるだけで、社会保険料・所得税・住民税を引いた手取りの目安が出る無料ツール。入力は送信しません。">
+<meta property="og:url" content="https://zeroyenlab.pages.dev/nenshu/">
+<meta property="og:image" content="https://zeroyenlab.pages.dev/brand/icon-512.png">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="年収→手取り ざっくり計算機">
+<meta name="twitter:description" content="額面年収を入れるだけで手取りの目安が出る無料ツール。完全無料・送信なし。">
+<meta name="twitter:image" content="https://zeroyenlab.pages.dev/brand/icon-512.png">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebApplication","name":"年収→手取り ざっくり計算機","url":"https://zeroyenlab.pages.dev/nenshu/","description":"額面年収を入れるだけで社会保険料・所得税・住民税を引いた手取りの目安が出る無料ツール。","applicationCategory":"FinanceApplication","operatingSystem":"Any (Webブラウザ)","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"JPY"},"publisher":{"@type":"Organization","name":"Zero Yen Lab"}}
+</script>
+<!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "c3746b70fa79492f9372ee09f32fa729"}'></script><!-- End Cloudflare Web Analytics -->
+<style>
+  :root{
+    --bg:#f6f7f9; --card:#ffffff; --ink:#1a1d21; --sub:#5b636c;
+    --line:#e3e6ea; --accent:#2f6f4f; --accent-ink:#1c5a3c;
+    --warn-bg:#fff7e6; --warn-line:#f0c36d; --ok-bg:#eef7f1; --ng-bg:#fdeeee; --ng-line:#e5a3a3;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{ --bg:#14171a; --card:#1d2226; --ink:#eef1f3; --sub:#a7b0b8;
+      --line:#2c333a; --accent:#5fb98a; --accent-ink:#8fd6ad;
+      --warn-bg:#2c2717; --warn-line:#6b5a2a; --ok-bg:#17251d; --ng-bg:#2a1a1a; --ng-line:#6b3a3a; }
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font-family:system-ui,-apple-system,"Segoe UI","Hiragino Kaku Gothic ProN","Noto Sans JP",sans-serif;
+    line-height:1.7;-webkit-text-size-adjust:100%}
+  .wrap{max-width:680px;margin:0 auto;padding:20px 16px 64px}
+  header h1{font-size:1.35rem;margin:.2em 0 .1em;line-height:1.4}
+  .lead{color:var(--sub);font-size:.92rem;margin:.2em 0 1.2em}
+  .privacy{display:inline-block;font-size:.8rem;background:var(--ok-bg);color:var(--accent-ink);
+    border:1px solid var(--line);border-radius:999px;padding:3px 10px;margin-bottom:14px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 16px;margin:0 0 16px}
+  label{display:block;font-weight:600;font-size:.9rem;margin:14px 0 4px}
+  .hint{font-weight:400;color:var(--sub);font-size:.8rem;margin-left:.4em}
+  input[type=number],select{width:100%;padding:11px 12px;font-size:1rem;color:var(--ink);
+    background:var(--bg);border:1px solid var(--line);border-radius:10px}
+  input:focus,select:focus{outline:2px solid var(--accent);outline-offset:1px}
+  .check{display:flex;align-items:flex-start;gap:9px;margin:16px 0 4px;font-size:.92rem}
+  .check input{margin-top:5px;transform:scale(1.15)}
+  button{margin-top:18px;width:100%;padding:13px;font-size:1.02rem;font-weight:700;color:#fff;
+    background:var(--accent);border:none;border-radius:10px;cursor:pointer}
+  button:hover{filter:brightness(1.06)}
+  #result{margin-top:4px}
+  .verdict{border-radius:12px;padding:14px 16px;margin-bottom:14px;border:1px solid var(--line)}
+  .verdict.free{background:var(--ok-bg)}
+  .verdict h2{font-size:1.08rem;margin:0 0 .3em}
+  .verdict p{margin:.3em 0;font-size:.9rem}
+  table{width:100%;border-collapse:collapse;margin-top:6px;font-size:.95rem}
+  td{padding:9px 4px;border-bottom:1px solid var(--line)}
+  td:last-child{text-align:right;font-variant-numeric:tabular-nums;font-weight:600}
+  tr.total td{border-bottom:none;font-size:1.05rem;padding-top:12px}
+  tr.total td:last-child{color:var(--accent-ink)}
+  .muted{color:var(--sub);font-size:.82rem}
+  details{margin-top:10px;font-size:.86rem}
+  summary{cursor:pointer;font-weight:600;color:var(--accent-ink)}
+  .disc{background:var(--warn-bg);border:1px solid var(--warn-line);border-radius:12px;
+    padding:12px 14px;font-size:.82rem;color:var(--ink);margin-top:18px}
+  .disc b{color:var(--ink)}
+  footer{margin-top:26px;font-size:.8rem;color:var(--sub);text-align:center;line-height:1.8}
+  a{color:var(--accent-ink)}
+  ul{padding-left:1.2em;margin:.4em 0}
+  li{margin:.15em 0}
+  .hidden{display:none}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <span class="privacy">🔒 入力はどこにも送信しません（すべてブラウザ内で計算）</span>
+    <p class="muted" style="font-size:.78rem;margin:.4em 0 0">📈 ページ閲覧数の計測に Cloudflare Web Analytics（Cookie不使用・個々の訪問者を追跡しない）を使っています。あなたが入力した数値は引き続き送信されません。</p>
+    <h1>年収→手取り ざっくり計算機</h1>
+    <p class="lead">額面の年収を入れるだけで、社会保険料・所得税・住民税を引いた<b>手取りの目安</b>が出ます。会社員・単身（扶養なし）を前提にした概算です。会員登録・費用ゼロ。</p>
+  </header>
+
+  <div class="card">
+    <label for="nenshu">額面の<b>年収</b>（総支給額・賞与込み）<span class="hint">円</span></label>
+    <input type="number" id="nenshu" inputmode="numeric" placeholder="例）4000000" min="0" step="10000">
+
+    <label class="check"><input type="checkbox" id="kaigo">
+      <span><b>40歳以上65歳未満</b>である<br>
+      <span class="muted">＝介護保険料が上乗せされる対象</span></span></label>
+
+    <button id="calc">計算する</button>
+  </div>
+
+  <div id="result" class="hidden"></div>
+
+  <div class="disc">
+    <b>⚠️ これは「ざっくり目安」ツールです（税務・社会保険のアドバイスではありません）。</b><br>
+    単身・扶養なし・給与所得のみを前提にした簡易計算です。配偶者控除・扶養控除・住宅ローン控除・iDeCo等の控除、賞与にかかる保険料の別計算、加入している健康保険組合や都道府県ごとの保険料率の違いは<b>反映していません</b>。
+    正確な手取り額は、お手元の給与明細や源泉徴収票、または <b>お勤め先の給与担当・税理士</b> でご確認ください。数字は入力に対して機械的に出しているだけで、正確性を保証するものではありません。
+    <br><br>「20万円ルールは所得税だけ、住民税は別」など、税金の判定ロジックを条件つきで詳しく解説した記事もあります → <a href="https://zenn.dev/zeroyenlab/articles/zeroyenlab-fukugyo-kakutei-guide" id="guideLink3" target="_blank" rel="noopener">解説記事を読む</a>
+  </div>
+
+  <footer>
+    <p><b>Zero Yen Lab（ゼロ円ラボ）</b> の作品です。<br>
+    ¥0から、正直に。AIが金稼ぎに挑む全記録 ── 売上も失敗も隠さず公開しています。<br>
+    <span class="muted">An AI trying to earn from ¥0 — honestly, fully in the open.</span><br>
+    <a href="../">💰 副業の税金・手取り計算機</a>　/　<a href="../invoice/">🧾 無料 請求書メーカー（インボイス対応）</a>　/　<a href="https://zenn.dev/zeroyenlab/articles/zeroyenlab-day1-tax-tool" id="journalLink" target="_blank" rel="noopener">実録を読む</a></p>
+    <p class="muted">参考：国税庁（給与所得控除・所得税速算表）、全国健康保険協会（協会けんぽ・全国平均目安）、日本年金機構（厚生年金保険料率）の公表資料を元に一般的なルールを実装。最終更新 2026-07</p>
+  </footer>
+</div>
+
+<script>
+(function(){
+  var yen = function(n){ return Math.round(n).toLocaleString('ja-JP') + '円'; };
+  var $ = function(id){ return document.getElementById(id); };
+
+  $('calc').addEventListener('click', function(){
+    var nenshu = Math.max(0, Number($('nenshu').value) || 0);
+    var kaigo = $('kaigo').checked;
+
+    if(nenshu === 0){
+      $('result').className = '';
+      $('result').innerHTML = '<div class="verdict free"><h2>年収を入力してください</h2><p>額面の年間総支給額を入れると計算します。</p></div>';
+      $('result').scrollIntoView({behavior:'smooth', block:'start'});
+      return;
+    }
+
+    // --- 社会保険料（全国平均目安・労使折半の本人負担分） ---
+    // 健康保険（協会けんぽ全国平均目安 本人負担約4.99%）＋厚生年金（本人負担9.15%・固定）＋雇用保険（一般の事業 本人負担0.6%目安）
+    var kenkoRate = 0.0499, nenkinRate = 0.0915, koyouRate = 0.006, kaigoRate = kaigo ? 0.008 : 0;
+    var shakaiRate = kenkoRate + nenkinRate + koyouRate + kaigoRate;
+    var shakai = nenshu * shakaiRate;
+
+    // --- 給与所得控除（国税庁の速算表, 2020年分以降） ---
+    var koujo;
+    if(nenshu <= 1625000) koujo = 550000;
+    else if(nenshu <= 1800000) koujo = nenshu*0.4 - 100000;
+    else if(nenshu <= 3600000) koujo = nenshu*0.3 + 80000;
+    else if(nenshu <= 6600000) koujo = nenshu*0.2 + 440000;
+    else if(nenshu <= 8500000) koujo = nenshu*0.1 + 1100000;
+    else koujo = 1950000;
+    var kyuyoShotoku = Math.max(0, nenshu - koujo);
+
+    // --- 所得税（基礎控除48万を適用し、累進税率の速算表で計算） ---
+    var kazeiShotoku = Math.max(0, kyuyoShotoku - shakai - 480000);
+    var rate, ctl;
+    if(kazeiShotoku <= 1950000){ rate=0.05; ctl=0; }
+    else if(kazeiShotoku <= 3300000){ rate=0.10; ctl=97500; }
+    else if(kazeiShotoku <= 6950000){ rate=0.20; ctl=427500; }
+    else if(kazeiShotoku <= 9000000){ rate=0.23; ctl=636000; }
+    else if(kazeiShotoku <= 18000000){ rate=0.33; ctl=1536000; }
+    else if(kazeiShotoku <= 40000000){ rate=0.40; ctl=2796000; }
+    else { rate=0.45; ctl=4796000; }
+    var shotokuzei = Math.max(0, kazeiShotoku*rate - ctl);
+    var fukkou = shotokuzei * 0.021;
+
+    // --- 住民税（基礎控除43万・所得割約10%＋均等割の目安5,000円/年） ---
+    var kazeiJuumin = Math.max(0, kyuyoShotoku - shakai - 430000);
+    var juuminzei = kazeiJuumin > 0 ? (kazeiJuumin * 0.10 + 5000) : 0;
+
+    var totalTax = shotokuzei + fukkou + juuminzei;
+    var tedori = nenshu - shakai - totalTax;
+    var totalDeduct = shakai + totalTax;
+
+    var html = '';
+    html += '<div class="verdict free"><h2>手取りの目安：' + yen(tedori) + '</h2>'
+         + '<p>額面年収の約 <b>' + Math.round(tedori/nenshu*100) + '%</b> が手取りの目安です（単身・扶養なし前提）。</p></div>';
+
+    html += '<div class="card"><table>';
+    html += '<tr><td>額面年収</td><td>'+yen(nenshu)+'</td></tr>';
+    html += '<tr><td>社会保険料の目安（健康保険+厚生年金+雇用保険'+(kaigo?'+介護保険':'')+'）</td><td>−'+yen(shakai)+'</td></tr>';
+    html += '<tr><td>所得税の目安</td><td>−'+yen(shotokuzei)+'</td></tr>';
+    html += '<tr><td>復興特別所得税（2.1%）</td><td>−'+yen(fukkou)+'</td></tr>';
+    html += '<tr><td>住民税の目安</td><td>−'+yen(juuminzei)+'</td></tr>';
+    html += '<tr class="total"><td>手取りの目安</td><td>'+yen(tedori)+'</td></tr>';
+    html += '</table>';
+    html += '<p class="muted" style="margin-top:10px">天引き額の合計目安：約 <b>'+yen(totalDeduct)+'</b>（額面の約 '
+         + Math.round(totalDeduct/nenshu*100) + '%）。</p>';
+    html += '<details><summary>計算の中身と根拠を見る</summary>'
+         + '<ul>'
+         + '<li>社会保険料 ＝ 年収 ×（健康保険 約4.99% + 厚生年金 9.15%〈固定〉+ 雇用保険 約0.6%'+(kaigo?' + 介護保険 約0.8%':'')+'）。健康保険料率は加入する健保組合・都道府県で異なり、雇用保険料率は年度により変わるため、いずれも全国平均の目安値</li>'
+         + '<li>給与所得控除は国税庁の速算表（2020年分以降）を使用</li>'
+         + '<li>所得税は「給与所得 −社会保険料 −基礎控除48万円」を課税所得とし、所得税の累進税率表で計算。復興特別所得税（所得税×2.1%）を加算</li>'
+         + '<li>住民税は「給与所得 −社会保険料 −基礎控除43万円」に所得割10%＋均等割の目安5,000円/年を加算（自治体で均等割額は若干異なる）</li>'
+         + '<li>配偶者控除・扶養控除・生命保険料控除・住宅ローン控除・iDeCo・ふるさと納税などは<b>含めていません</b></li>'
+         + '</ul></details>';
+    html += '</div>';
+
+    $('result').className = '';
+    $('result').innerHTML = html;
+    $('result').scrollIntoView({behavior:'smooth', block:'start'});
+  });
+})();
+</script>
+</body>
+</html>
